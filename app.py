@@ -14,12 +14,12 @@ class MyApp:
         self.documents = []
         self.embeddings = None
         self.index = None
-        self.load_pdf("THEDIA1.pdf")
+        self.load_pdf("indian_classical_dances.pdf")
         self.build_vector_db()
 
     def load_pdf(self, file_path: str) -> None:
         """Extracts text from a PDF file and stores it in the app's documents."""
-        doc = fitz.open(file_path)
+        doc = fitz.open(file_pathttps://huggingface.co/spaces/Av4369997/Indian_Dance_Form_Explorerh)
         self.documents = []
         for page_num in range(len(doc)):
             page = doc[page_num]
@@ -53,7 +53,7 @@ def respond(
     temperature: float,
     top_p: float,
 ):
-    system_message = "You are a knowledgeable DBT coach. You always talk about one options at at a time. you add greetings and you ask questions like real counsellor. Remember you are helpful and a good listener. You are concise and never ask multiple questions, or give long response. You response like a human counsellor accurately and correctly. consider the users as your client. and practice verbal cues only where needed. Remember you must be respectful and consider that the user may not be in a situation to deal with a wordy chatbot.  You Use DBT book to guide users through DBT exercises and provide helpful information. When needed only then you ask one follow up question at a time to guide the user to ask appropiate question. You avoid giving suggestion if any dangerous act is mentioned by the user and refer to call someone or emergency."
+    system_message = "You are an expert on Indian classical dance forms. You provide concise and accurate information about various dance styles such as Bharatanatyam, Kathak, Kathakali, Kuchipudi, Manipuri, Mohiniyattam, Odissi, and Sattriya. You explain their characteristics, origins, and cultural significance. You answer one question at a time and may ask a follow-up question if needed for clarity. Your responses are informative yet brief, suitable for users seeking quick, accurate information about Indian classical dances."
     messages = [{"role": "system", "content": system_message}]
 
     for val in history:
@@ -67,15 +67,15 @@ def respond(
     # RAG - Retrieve relevant documents
     retrieved_docs = app.search_documents(message)
     context = "\n".join(retrieved_docs)
-    messages.append({"role": "system", "content": "Relevant documents: " + context})
+    messages.append({"role": "system", "content": "Relevant information: " + context})
 
     response = ""
     for message in client.chat_completion(
         messages,
-        max_tokens=100,
+        max_tokens=150,
         stream=True,
-        temperature=0.98,
-        top_p=0.7,
+        temperature=0.7,
+        top_p=0.9,
     ):
         token = message.choices[0].delta.content
         response += token
@@ -85,22 +85,22 @@ demo = gr.Blocks()
 
 with demo:
     gr.Markdown(
-        "‼️Disclaimer: This chatbot is based on a DBT exercise book that is publicly available. and just to test RAG implementation.‼️"
+        "Welcome to the Indian Classical Dance Explorer! Ask questions about various Indian classical dance forms and their characteristics."
     )
     
     chatbot = gr.ChatInterface(
         respond,
         examples=[
-            ["I feel overwhelmed with work."],
-            ["Can you guide me through a quick meditation?"],
-            ["How do I stop worrying about things I can't control?"],
-            ["What are some DBT skills for managing anxiety?"],
-            ["Can you explain mindfulness in DBT?"],
-            ["I am interested in DBT excercises"],
-            ["I feel restless. Please help me."],
-            ["I have destructive thoughts coming to my mind repetatively."]
+            ["What are the main Indian classical dance forms?"],
+            ["Can you explain the origins of Bharatanatyam?"],
+            ["How does Kathak differ from other classical dance forms?"],
+            ["What are the distinctive features of Kathakali?"],
+            ["Tell me about the costume and makeup in Kuchipudi."],
+            ["What is unique about Manipuri dance?"],
+            ["How is Mohiniyattam different from other South Indian dance forms?"],
+            ["What are the key elements of Odissi dance?"]
         ],
-        title='Dialectical Behaviour Therapy Assistant👩‍⚕️🧘‍♀️'
+        title='Indian Classical Dance Explorer'
     )
 
 if __name__ == "__main__":
