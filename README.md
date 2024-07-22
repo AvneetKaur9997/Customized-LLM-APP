@@ -72,10 +72,6 @@ You can customize the system message, max tokens, temperature, and top-p values 
 - How is Mohiniyattam different from other South Indian dance forms?
 - What are the key elements of Odissi dance?
 
-## License
-
-This project is licensed under the MIT License. See the `LICENSE` file for details.
-
 ## Acknowledgments
 
 - [Gradio](https://www.gradio.app/) for the easy-to-use interface
