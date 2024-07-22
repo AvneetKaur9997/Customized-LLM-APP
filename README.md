@@ -84,7 +84,3 @@ For more information on `huggingface_hub` Inference API support, please check th
 
 ---
 
-Feel free to contribute to the project by opening issues or submitting pull requests.
-```
-
-Replace `https://github.com/yourusername/indian-classical-dance-explorer.git` with the actual URL of your GitHub repository.
