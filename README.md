@@ -1,42 +1,94 @@
-# Customized-LLM-APP
+# Indian Classical Dance Explorer
 
-Building a Retrieval-Augmented Generation (RAG) bot can significantly enhance the capabilities of a language model by incorporating external knowledge to generate more accurate and contextually relevant responses. This guide will walk you through creating a simple RAG bot using Gradio and the Hugging Face APIs.
+This is a Gradio-based chatbot that helps users explore various Indian classical dance forms such as Bharatanatyam, Kathak, Kathakali, Kuchipudi, Manipuri, Mohiniyattam, Odissi, and Sattriya. The chatbot uses the HuggingFace Zephyr-7b-beta model and Retrieval-Augmented Generation (RAG) to provide accurate and informative responses about these dance styles.
 
-But how does RAG enhance LLM’s performance?
+## Features
 
-RAG improves the performance of language models by augmenting them with external documents. This method retrieves relevant documents based on the user query and combines them with the original prompt before passing them to the language model for response generation. This approach ensures that the language model can access up-to-date and domain-specific information without the need for extensive retraining.
+- Explore different Indian classical dance forms
+- Learn about Bharatanatyam, Kathak, Kathakali, Kuchipudi, Manipuri, Mohiniyattam, Odissi, and Sattriya
+- Interactive chat interface built with Gradio
+- RAG-based system to provide contextually relevant information
+- Customizable system messages, token limits, temperature, and top-p values
 
+## Requirements
 
+- Python 3.x
+- `gradio`
+- `huggingface_hub==0.22.2`
+- `PyMuPDF`
+- `sentence-transformers`
+- `numpy`
+- `faiss-cpu`
 
-A common scenario of RAG helping LLM (Source)
+You can install the required packages using the following command:
 
-The basic steps in RAG can be simplified as follows:
+```bash
+pip install -r requirements.txt
+```
 
-Input: The question to which the LLM system responds is referred to as the input. If no RAG is used, the LLM is directly used to respond to the question.
+## Usage
 
-Indexing: If RAG is used, then a series of related documents are indexed by chunking them first, generating embeddings of the chunks, and indexing them into a vector store. At inference, the query is also embedded in a similar way.
+1. Clone the repository:
 
+```bash
+git clone https://github.com/yourusername/indian-classical-dance-explorer.git
+cd indian-classical-dance-explorer
+```
 
-Basic retrieval steps in RAG. (Source)
+2. Install the required packages:
 
-Retrieval: The relevant documents are obtained by comparing the query against the indexed vectors, also denoted as “Relevant Documents”.
+```bash
+pip install -r requirements.txt
+```
 
-Generation: The relevant documents are combined with the original prompt as additional context. The combined text and prompt are then passed to the model for response generation which is then prepared as the final output of the system to the user.
+3. Add your PDF file (e.g., `indian_classical_dances.pdf`) to the project directory.
 
-In the example provided, using the model directly fails to respond to the question due to a lack of knowledge of current events. On the other hand, when using RAG, the system can pull the relevant information needed for the model to answer the question appropriately. (Source)
+4. Run the application:
 
-Now Let’s Build a Chatbot using RAG:
+```bash
+python app.py
+```
 
-I have used Zephyr LLM model and all-MiniLM-L6-v2 sentence transformer model. This sentence-transformers model maps sentences & paragraphs to a 384 dimensional dense vector space and can be used for tasks like clustering or semantic search.
+The application will launch a Gradio interface in your browser, where you can interact with the chatbot.
 
-The all-* models were trained on all available training data (more than 1 billion training pairs) and are designed as general purpose models. The all-mpnet-base-v2 model provides the best quality, while all-MiniLM-L6-v2 is 5 times faster and still offers good quality. Toggle All models to see all evaluated original models.
+## File Structure
 
-We need the following ingredients:
+- `app.py`: The main application script containing the Gradio interface, chatbot logic, and RAG implementation.
+- `requirements.txt`: The file listing the required Python packages.
+- `indian_classical_dances.pdf`: The PDF file containing information about Indian classical dances (you need to add this file).
 
-1. A PDF as your knowledgebase
+## Customization
 
-2. A requirements.txt file
+You can customize the system message, max tokens, temperature, and top-p values through the Gradio interface. Additionally, you can add more examples to guide the interaction with the chatbot.
 
-3. An app.py file
+## Example Questions
 
-4. An account on Hugging Face (See this blog to learn about building a LLM chatbot in Hugging Face)
+- What are the main Indian classical dance forms?
+- Can you explain the origins of Bharatanatyam?
+- How does Kathak differ from other classical dance forms?
+- What are the distinctive features of Kathakali?
+- Tell me about the costume and makeup in Kuchipudi.
+- What is unique about Manipuri dance?
+- How is Mohiniyattam different from other South Indian dance forms?
+- What are the key elements of Odissi dance?
+
+## License
+
+This project is licensed under the MIT License. See the `LICENSE` file for details.
+
+## Acknowledgments
+
+- [Gradio](https://www.gradio.app/) for the easy-to-use interface
+- [HuggingFace](https://huggingface.co/) for the powerful language model
+- [PyMuPDF](https://pymupdf.readthedocs.io/en/latest/) for PDF processing
+- [SentenceTransformers](https://www.sbert.net/) for embedding models
+- [FAISS](https://faiss.ai/) for the vector database
+
+For more information on `huggingface_hub` Inference API support, please check the [docs](https://huggingface.co/docs/huggingface_hub/v0.22.2/en/guides/inference).
+
+---
+
+Feel free to contribute to the project by opening issues or submitting pull requests.
+```
+
+Replace `https://github.com/yourusername/indian-classical-dance-explorer.git` with the actual URL of your GitHub repository.
