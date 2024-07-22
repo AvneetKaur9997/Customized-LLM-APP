@@ -31,7 +31,7 @@ pip install -r requirements.txt
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/indian-classical-dance-explorer.git
+git clone https://github.com/AvneetKaur9997/indian-classical-dance-explorer.git
 cd indian-classical-dance-explorer
 ```
 
